@@ -18,11 +18,12 @@ express --view=hbs node-agenda-app
 ```
 
 ```
+cd node-agenda-app
+
+```
 npm install --save-dev nodemon
 ```
 
-```
-cd node-agenda-app
 npm install
 ```
 
