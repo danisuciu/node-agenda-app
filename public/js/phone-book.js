@@ -10,16 +10,15 @@ function getRow(person) {
         "</tr>";
 }
 
-var persons = [];
-console.info('loading persons');
-
-$.ajax({
-    url: '/phone-book',
-    method: "GET"
-}).done(function (persons) {
-    console.info('done:', persons);
-    display(persons);
-});
+function loadContacts() {
+    $.ajax({
+        url: '/phone-book',
+        method: "GET"
+    }).done(function (persons) {
+        console.info('done:', persons);
+        display(persons);
+    });
+}
 
 function deleteContact (id) {
     $.ajax({
@@ -47,14 +46,14 @@ function saveContact (person) {
 
 }
 
-function bindEvents(persons) {
-    $('#phone-book tbody a.edit').click(function () {
+function bindEvents() {
+    $('#phone-book tbody').delegate('a.edit', 'click', function () {
         var id = $(this).data('id');
 
-        editContact(id, persons);
+        editContact(id);
     });
 
-    $('#phone-book tbody a.delete').click(function () {
+    $('#phone-book tbody').delegate('a.delete', 'click', function () {
         var id = $(this).data('id');
 
         deleteContact(id);
@@ -71,6 +70,7 @@ function getActionRow() {
 }
 
 function display(persons) {
+    window.persons = persons;
     var rows = '';
 
     // persons.forEach(function (person) {
@@ -89,11 +89,9 @@ function display(persons) {
     rows += getActionRow();
 
     $('#phone-book tbody').html(rows);
-
-    bindEvents(persons);
 }
 
-function editContact(id, persons) {
+function editContact(id) {
     var editPerson = persons.find(function (person) {
         console.log(person.firstName);
         return person.id == id;
@@ -116,3 +114,8 @@ function editContact(id, persons) {
         saveContact(person);
     });
 }
+
+var persons = [];
+console.info('loading persons');
+loadContacts();
+bindEvents(persons);
