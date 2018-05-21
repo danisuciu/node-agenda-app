@@ -47,6 +47,29 @@ function saveContact (person) {
 
 }
 
+function bindEvents(persons) {
+    $('#phone-book tbody a.edit').click(function () {
+        var id = $(this).data('id');
+
+        editContact(id, persons);
+    });
+
+    $('#phone-book tbody a.delete').click(function () {
+        var id = $(this).data('id');
+
+        deleteContact(id);
+    });
+}
+
+function getActionRow() {
+    return '<tr>' +
+        '<td><input type="text" required name="firstName" placeholder="Enter first name"></td>' +
+        '<td><input type="text" name="lastName" placeholder="Enter last name"></td>' +
+        '<td><input type="text" required name="phone" placeholder="Enter phone"></td>' +
+        '<td><button type="submit">Save</button></td>' +
+        '</tr>';
+}
+
 function display(persons) {
     var rows = '';
 
@@ -63,26 +86,11 @@ function display(persons) {
 
     console.info(rows);
 
-    rows += '<tr>' +
-        '<td><input type="text" required name="firstName" placeholder="Enter first name"></td>' +
-        '<td><input type="text" name="lastName" placeholder="Enter last name"></td>' +
-        '<td><input type="text" required name="phone" placeholder="Enter phone"></td>' +
-        '<td><button type="submit">Save</button></td>' +
-        '</tr>';
+    rows += getActionRow();
 
     $('#phone-book tbody').html(rows);
 
-    $('#phone-book tbody a.edit').click(function () {
-        var id = $(this).data('id');
-
-       editContact(id, persons);
-    });
-
-    $('#phone-book tbody a.delete').click(function () {
-        var id = $(this).data('id');
-
-        deleteContact(id);
-    });
+    bindEvents(persons);
 }
 
 function editContact(id, persons) {
