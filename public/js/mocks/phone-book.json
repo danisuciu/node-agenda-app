@@ -1,0 +1,8 @@
+[
+  {"id": "1", "firstName": "Daniel", "lastName": "Mihai", "phone": "07430743"},
+  {"id": "2", "firstName": "Andrei", "lastName": "Vasile", "phone": "07450745"},
+  {"id": "3", "firstName": "Filip", "lastName": "Tomas", "phone": "07460746"},
+  {"id": "4", "firstName": "Andrei", "lastName": "Raul", "phone" : "07440744"},
+  {"id": "5", "firstName": "Ninu", "lastName": "Nicu", "phone": "07400740"},
+  {"id": "6", "firstName":"Anca","lastName":"Ioana","phone":"07710771"}
+]

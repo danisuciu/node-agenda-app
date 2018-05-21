@@ -3,25 +3,24 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    // TO DO ...
-    const fs = require('fs');
+    const fs= require('fs');
 
-    let rawdata = fs.readFileSync('./public/js/mocks/phone-book.json');
+    let rawdata = fs.readFileSync('phone-book.json');
     let phoneBooks = JSON.parse(rawdata);
-
-    res.json(phonebook.json);
+    res.json(phoneBooks);
 });
+
 router.post('/add', function(req, res, next) {
+
     //read
     const fs = require('fs');
 
-    let rawdata = fs.readFileSync('./public/js/mocks/phone-book.json');
+    let rawdata = fs.readFileSync('phone-book.json');
     let phoneBooks = JSON.parse(rawdata);
-
     //update
     phoneBooks.push({
-        id:100,  // TO DO
-        firstName: req.body.firstName,
+        id: new Date().getTime(),
+        firstName:req.body.firstName,
         lastName: req.body.lastName,
         phone: req.body.phone
     });
@@ -31,10 +30,35 @@ router.post('/add', function(req, res, next) {
     fs.writeFileSync('phone-book.json', data);
 
     //return
-    // res.json(phoneBooks)
+    //res.json(phoneBooks);
     res.writeHead(301,
-        {Location:'/phone-book.html'});
-res.end();
+        {Location: '/phone-book.html'}
+    );
+    res.end();
+});
+
+router.post('/delete', function(req, res, next) {
+
+    console.info('delete here');
+
+    //read
+    const fs = require('fs');
+
+    let rawdata = fs.readFileSync('phone-book.json');
+    let persons = JSON.parse(rawdata);
+
+    // TODO delete from phoneBooks
+    const id = parseInt(req.body.id);
+
+    persons = persons.filter(function(person) {
+        return parseInt(person.id) !== id;
+    });
+
+    //save
+    let data = JSON.stringify(persons, null, 2);
+    fs.writeFileSync('phone-book.json', data);
+
+    res.json(persons);
 });
 
 module.exports = router;
