@@ -18,21 +18,16 @@
     "phone": "07460746"
   },
   {
-    "id": "4",
-    "firstName": "Andrei",
-    "lastName": "Raul",
-    "phone": "07440744"
+    "id": 1526889682615,
+    "firstName": "Răul",
+    "lastName": "Suciu",
+    "phone": "07420742"
   },
   {
-    "id": 1526322443515,
-    "firstName": "pentru",
-    "lastName": "delete",
-    "phone": "000"
-  },
-  {
-    "id": 1526322464686,
-    "firstName": "pentru",
-    "lastName": "edit",
-    "phone": "111111"
+    "id": 1526903185737,
+    "firstName": "Vasile",
+    "lastName": "Dore",
+    "phone": "07423131",
+    "fistName": "Piaf"
   }
 ]

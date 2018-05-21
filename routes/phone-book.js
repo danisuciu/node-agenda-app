@@ -61,4 +61,31 @@ router.post('/delete', function(req, res, next) {
     res.json(persons);
 });
 
+router.post('/update', function(req, res, next) {
+    //read
+    const fs = require('fs');
+
+    let rawdata = fs.readFileSync('phone-book.json');
+    let persons = JSON.parse(rawdata);
+
+    // TODO delete from phoneBooks
+    const id = parseInt(req.body.id);
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const phone = req.body.phone;
+
+    let editPerson = persons.find(function (person) {
+        return person.id === id;
+    });
+    editPerson.firstName = firstName;
+    editPerson.lastName = lastName;
+    editPerson.phone = phone;
+
+    //save
+    let data = JSON.stringify(persons, null, 2);
+    fs.writeFileSync('phone-book.json', data);
+
+    res.json(persons);
+});
+
 module.exports = router;

@@ -33,7 +33,19 @@ function deleteContact (id) {
         display(persons);
     });
 
-};
+}
+
+function saveContact (person) {
+    $.ajax({
+        url: '/phone-book/update',
+        method: "POST",
+        data: person
+    }).done(function (persons) {
+        console.warn('done:', persons);
+        display(persons);
+    });
+
+}
 
 function display(persons) {
     var rows = '';
@@ -61,27 +73,38 @@ function display(persons) {
     $('#phone-book tbody').html(rows);
 
     $('#phone-book tbody a.edit').click(function () {
-        var id = $ (this).data('id');
-        // var id = $(this).attr('data-id');
-        // var id = $(this).data('id');
-        console.info('click on ', this, id);
+        var id = $(this).data('id');
 
-        deleteContact(id);
-
-        var editPerson = persons.find(function (person) {
-            console.log(person.firstName);
-            return person.id == id;
-        });
-        console.warn('edit', editPerson);
-
-        $('input[name=firstName]').val(editPerson.firstName);
-        $('input[name=lastName]').val(editPerson.lastName);
-        $('input[name=phone]').val(editPerson.phone);
+       editContact(id, persons);
     });
 
     $('#phone-book tbody a.delete').click(function () {
         var id = $(this).data('id');
 
         deleteContact(id);
+    });
+}
+
+function editContact(id, persons) {
+    var editPerson = persons.find(function (person) {
+        console.log(person.firstName);
+        return person.id == id;
+    });
+    console.warn('edit', editPerson);
+
+    $('input[name=firstName]').val(editPerson.firstName);
+    $('input[name=lastName]').val(editPerson.lastName);
+    $('input[name=phone]').val(editPerson.phone);
+
+    $( ".add-form" ).submit(function( event ) {
+        event.preventDefault();
+        const person = {
+          id: id,
+          firstName: $('input[name=firstName]').val(),
+          lastName: $('input[name=lastName]').val(),
+          phone: $('input[name=phone]').val(),
+        };
+
+        saveContact(person);
     });
 }
