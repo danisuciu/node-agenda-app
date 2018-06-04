@@ -19,11 +19,13 @@ express --view=hbs node-agenda-app
 
 ```
 cd node-agenda-app
+```
 
 ```
 npm install --save-dev nodemon
 ```
 
+```
 npm install
 ```
 
@@ -33,9 +35,6 @@ Edit **package.json** and add next lines:
 "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www"
-},
-"devDependencies": {
-    "nodemon": "^1.14.11"
 }
 ```
 
