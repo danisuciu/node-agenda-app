@@ -47,7 +47,6 @@ router.post('/delete', function(req, res, next) {
     let rawdata = fs.readFileSync('phone-book.json');
     let persons = JSON.parse(rawdata);
 
-    // TODO delete from phoneBooks
     const id = parseInt(req.body.id);
 
     persons = persons.filter(function(person) {
@@ -68,7 +67,6 @@ router.post('/update', function(req, res, next) {
     let rawdata = fs.readFileSync('phone-book.json');
     let persons = JSON.parse(rawdata);
 
-    // TODO delete from phoneBooks
     const id = parseInt(req.body.id);
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
